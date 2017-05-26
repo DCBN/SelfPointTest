@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
 import { SwitchContainer, SwitchInput, SwitchLabel } from '../styles/Switch.style';
 
 export default class Switch extends Component {
+    // Proptypes
     static propTypes = {
         id: PropTypes.string.isRequired,
         callback: PropTypes.func.isRequired
     };
 
+    // Init
     constructor() {
         super();   
         this.state = {
@@ -17,6 +18,7 @@ export default class Switch extends Component {
         this.toggleCheck = this.toggleCheck.bind(this);
     }
 
+    // Toggle:a checkbox "check" state
      toggleCheck() {
         this.setState(prev => {
             return {
@@ -26,6 +28,7 @@ export default class Switch extends Component {
         this.props.callback();
     }
 
+    // Render
     render() {
         return (
             <SwitchContainer ref='switch'>

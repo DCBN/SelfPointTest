@@ -3,19 +3,19 @@ import update from 'react/lib/update';
 import PropTypes from 'prop-types';
 import { DragSource, DragDropContext, DropTarget } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
-import { ImageGalleryContainer, ImageCardWrapper } from '../styles/ImageGallery.style';
 import ImageCard from './ImageCard';
 import { Types } from '../Constants/ItemTypes';
+import { ImageGalleryContainer, ImageCardWrapper } from '../styles/ImageGallery.style';
 
-const springConfig = { stiffness: 300, damping: 50 };
-
+// Kontext för react-dnd
 @DragDropContext(HTML5Backend)
 export default class ImageGallery extends Component{
-    
+    // Proptypes
     static propTypes = {
         opacity: PropTypes.number.isRequired,
     }
 
+    // Init
     constructor(props) {
         super(props);
         this.state = {
@@ -29,7 +29,7 @@ export default class ImageGallery extends Component{
         this.moveImage = this.moveImage.bind(this);
     }
 
-
+    // moveImage - byt plats på två bilder när du dra en över den andra
     moveImage(dragIndex, hoverIndex) {
         const { images } = this.state;
         const dragImage = images[dragIndex];
@@ -44,6 +44,7 @@ export default class ImageGallery extends Component{
         }));
     }
 
+    // Render
     render() {
         const { images } = this.state;
         return (
@@ -63,26 +64,3 @@ export default class ImageGallery extends Component{
         )
     }
 }
-
-/*
-    <ImageCard 
-        key={image.id} 
-        index={i} 
-        id={image.id} 
-        image={image.url} 
-        moveImage={this.moveImage}
-        scale={value.x}
-    />
-
-                            <Motion key={i} style={{x: spring(this.state.click ? 1.2 : 1)}}>
-                            { value =>
-                                <ImageCard 
-                                    key={image.id} 
-                                    index={i} 
-                                    id={image.id} 
-                                    image={image.url} 
-                                    moveImage={this.moveImage}
-                                />  
-                            }
-                        </Motion>
-*/

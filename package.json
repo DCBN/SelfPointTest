@@ -6,7 +6,7 @@
   "author": "Alex Hoeing",
   "license": "MIT",
   "scripts": {
-    "dev": "webpack-dev-server --open --progress --profile --watch --inline --hot && nodemon app.js",
+    "dev": "webpack-dev-server --open --progress --profile --watch --inline --hot",
     "prod": "webpack && nodemon app.js"
   },
   "devDependencies": {

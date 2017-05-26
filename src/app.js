@@ -5,7 +5,7 @@ import { render } from 'react-dom';
 // Components
 import SelfPointTest from './components/SelfPointTest';
 
-// Vars
+// Mount
 const mount = document.getElementById('mount');
 
 render(<SelfPointTest />, mount);

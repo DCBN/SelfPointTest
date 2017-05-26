@@ -9,8 +9,3 @@ export const ImageCardContainer = styled.div`
     float: left;
     cursor: pointer;
 `
-
-/*
-    transform: scale(${props => props.scale});
-    box-shadow: 0px ${props => props.boxShadow}px 5px 0px rgba(50, 50, 50, 0.75);
-*/

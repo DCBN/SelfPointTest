@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
 import { DragSource, DropTarget } from 'react-dnd';
+import { Motion, spring } from 'react-motion';
 import { ImageCardContainer } from '../styles/ImageCard.style';
 import { Types } from '../Constants/ItemTypes';
-import { Motion, spring } from 'react-motion';
 
+// imageSource för react-dnd
 const imageSource = {
     beginDrag(props) {
         return {
@@ -15,21 +16,25 @@ const imageSource = {
     },
 };
 
+// imageTarget för react-dnd - 
 const imageTarget = {
     hover(props, monitor, component) {
+        // Spara index i variabler
         const dragIndex = monitor.getItem().index;
         const hoverIndex = props.index;
 
+        // Ersätt inte ImageCards med sig själva
         if (dragIndex === hoverIndex) {
             return;
         }
-
+        // Gör bytet mellan ImageCards
         props.moveImage(dragIndex, hoverIndex);
-
+        // Mutation av state är bättre för prestanda i detta fallet
         monitor.getItem().index = hoverIndex;
     }
 }
 
+// DropTarget, DragSource - Decorators för ImageCard
 @DropTarget(Types.imageCard, imageTarget, connect => ({
     connectDropTarget: connect.dropTarget(),
 }))
@@ -39,6 +44,7 @@ const imageTarget = {
 }))
 export default class ImageCard extends Component{
     
+    // Proptypes
     static propTypes = {
         connectDragSource: PropTypes.func.isRequired,
         connectDropTarget: PropTypes.func.isRequired,
@@ -49,6 +55,7 @@ export default class ImageCard extends Component{
         moveImage: PropTypes.func.isRequired,
     };
 
+    // Init
     constructor() {
         super();
         this.state = {
@@ -56,7 +63,8 @@ export default class ImageCard extends Component{
         }
     }
 
-    handleClick = (e) => {
+    // Hantera "hover" på ImageCardContainer
+    handleHover = (e) => {
         this.setState(prev => {
             return {
                 hover: !this.state.hover
@@ -64,7 +72,7 @@ export default class ImageCard extends Component{
         })
     }
 
-
+    // Render
     render() {
         const { image, isDragging, connectDragSource, connectDropTarget } = this.props;
         return connectDragSource(connectDropTarget(
@@ -73,8 +81,8 @@ export default class ImageCard extends Component{
                     { value =>
                         <ImageCardContainer 
                             background={image} 
-                            onMouseOver={this.handleClick} 
-                            onMouseOut={this.handleClick}
+                            onMouseOver={this.handleHover} 
+                            onMouseOut={this.handleHover}
                             style={{
                                 boxShadow: `rgba(0, 0, 0, 0.2) 0px ${value.boxShadow}px ${2 * value.boxShadow}px 0px`,
                                 transform: `scale(${value.scale})`,

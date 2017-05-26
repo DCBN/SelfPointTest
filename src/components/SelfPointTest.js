@@ -4,6 +4,7 @@ import Switch from './Switch';
 import ImageGallery from './ImageGallery';
 
 export default class SelfPointTest extends Component {
+    // Init
     constructor() {
         super();
         this.state = {
@@ -13,6 +14,7 @@ export default class SelfPointTest extends Component {
         this.toggleDarkmode = this.toggleDarkmode.bind(this);
     }
 
+    // Toggle:a mörk bakgrund för ImageGallery
     toggleDarkmode() {
         this.setState(prev => {
             return {
@@ -21,9 +23,10 @@ export default class SelfPointTest extends Component {
         })
     }
 
+    // Render
     render() {
         return (
-            <AppContainer background="gray">
+            <AppContainer background="#3498db">
                 <DarkmodeController>
                    <DarkmodeLabel color={this.state.darkMode ? 'white' : 'black'}>Dark mode:</DarkmodeLabel>
                     <Switch id="darkmode" callback={this.toggleDarkmode}/>
